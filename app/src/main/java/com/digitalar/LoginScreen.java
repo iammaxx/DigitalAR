@@ -60,6 +60,11 @@ EditText Password;
         };
 
     }
+    public void put(View view)
+    {
+        Intent in = new Intent(this,SignupAct.class);
+        startActivity(in);
+    }
     public void get(View view) {
         String user = Username.getText().toString();
         String pass = Password.getText().toString();
