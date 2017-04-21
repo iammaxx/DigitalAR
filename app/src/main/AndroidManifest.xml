@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.digitalar">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,7 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignupAct"></activity>
+        <activity android:name=".SignupAct" />
+        <activity android:name=".Home" />
+        <activity
+            android:name=".AdmHome"
+            android:label="@string/title_activity_adm_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Addclass"></activity>
     </application>
 
 </manifest>

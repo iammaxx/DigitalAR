@@ -72,13 +72,6 @@
                 android:text="Login"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="put"
-                android:text="Sign Up" />
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

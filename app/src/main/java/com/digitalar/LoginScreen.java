@@ -85,7 +85,9 @@ EditText Password;
                                 else
                                 {
                                     p1.dismiss();
-                                    Toast.makeText(LoginScreen.this, "Login Successful", Toast.LENGTH_SHORT).show();
+
+                                   Toast.makeText(LoginScreen.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                    call();
                                     //Start next activity
                                 }
                             }
@@ -97,4 +99,9 @@ EditText Password;
             }
 
         }
+
+    private void call() {
+        Intent in = new Intent(this,AdmHome.class);
+        startActivity(in);
+    }
 }
