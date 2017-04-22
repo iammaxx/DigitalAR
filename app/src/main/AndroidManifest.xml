@@ -24,7 +24,8 @@
             android:name=".AdmHome"
             android:label="@string/title_activity_adm_home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Addclass"></activity>
+        <activity android:name=".Addclass" />
+        <activity android:name=".Choosecourse"></activity>
     </application>
 
 </manifest>

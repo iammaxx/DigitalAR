@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,11 +18,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.StringTokenizer;
 
 public class AdmHome extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -81,7 +93,8 @@ public class AdmHome extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
-
+    List<String>classes = new ArrayList<String>(50);
+    List<String>courses = new ArrayList<String>(50);
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -91,13 +104,57 @@ public class AdmHome extends AppCompatActivity
 
         if (id == R.id.nav_class) {
             // Handle the camera action
-            ItemFragment i1 = ItemFragment.newInstance(2);
+            mData.addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                // This method is called once with the initial value and again
+                                                // whenever data at this location is updated.
+                                                // String value = dataSnapshot.getValue(String.class);
+                                                HashMap<String, String> s3 = (HashMap) dataSnapshot.child("class").getValue();
+                                                Log.e("dede",s3.keySet().toString());
+                                                classes=new ArrayList<String>(50);
+                                                classes.addAll(s3.keySet());
+                                                //Log.d(TAG, "Value is: " + value);
+                                            }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+
+            });
+
+            ItemFragment i1 = ItemFragment.newInstance(classes,getApplicationContext(),0);
             FragmentTransaction f1 =getFragmentManager().beginTransaction();
-            f1.add(R.id.fra1,i1);
+            f1.replace(R.id.fra1,i1);
             f1.commit();
 
         } else if (id == R.id.nav_course)
         {
+            mData.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // This method is called once with the initial value and again
+                    // whenever data at this location is updated.
+                    // String value = dataSnapshot.getValue(String.class);
+                    HashMap<String, String> s3 = (HashMap) dataSnapshot.child("course").getValue();
+                    Log.e("dede",s3.keySet().toString());
+                    courses=new ArrayList<String>(50);
+                    courses.addAll(s3.keySet());
+                    //Log.d(TAG, "Value is: " + value);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+
+            });
+            ItemFragment i2 = ItemFragment.newInstance(courses,this,1);
+            FragmentTransaction f2 =getFragmentManager().beginTransaction();
+            f2.replace(R.id.fra1,i2);
+
+            f2.commit();
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -112,6 +169,7 @@ public class AdmHome extends AppCompatActivity
         return true;
     }
     Dialog d1;
+
 public void fab(View view)
 {
     d1 = new Dialog(this);

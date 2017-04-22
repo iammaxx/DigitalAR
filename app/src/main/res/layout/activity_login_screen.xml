@@ -40,7 +40,8 @@
                     android:hint="User name"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:text="spjn1234@gmail.com" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -58,7 +59,8 @@
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:text="12345678" />
 
             </android.support.design.widget.TextInputLayout>
 

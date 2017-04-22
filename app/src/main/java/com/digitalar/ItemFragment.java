@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import com.digitalar.dummy.DummyContent;
 import com.digitalar.dummy.DummyContent.DummyItem;
@@ -34,16 +35,21 @@ public class ItemFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
+   static String[] args10;
     public ItemFragment() {
     }
-
+   static ArrayAdapter<String> adapter;
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static ItemFragment newInstance(int columnCount) {
+    static List<String> s1;
+   static int state;
+    public static ItemFragment newInstance(List<String> s2,Context ct,int st) {
         ItemFragment fragment = new ItemFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putInt(ARG_COLUMN_COUNT, 1);
         fragment.setArguments(args);
+        s1=s2;
+        state=st;
         return fragment;
     }
 
@@ -70,11 +76,8 @@ public class ItemFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            List<String>s1 = new ArrayList<>(20);
-            s1.add("hello");
-            s1.add("hi");
-            s1.add("bye");
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(s1, mListener,getActivity().getApplicationContext(),state));
         }
         return view;
     }
@@ -110,6 +113,6 @@ public class ItemFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(String item);
     }
 }
